@@ -5,31 +5,36 @@ import com.google.gson.Gson;
 import com.iplanalyser.dao.RunDAO;
 import com.iplanalyser.enums.Type;
 import com.iplanalyser.model.RunClass;
+import com.sun.jdi.DoubleValue;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class IPLAnalyser {
-    Class className;
+    Class className,daoClass;
     HashMap<Class,List> hmap = new HashMap<>();
 
     public List getData(String filePath,String type){
         className = Type.valueOf(type.toUpperCase()).getKlass();
-        hmap.put(className,LoadData.loadData(filePath,className));
-        return this.hmap.get(className);
+        daoClass=Type.valueOf(type.toUpperCase()).getDaoClass();
+        hmap.put(daoClass,LoadData.loadData(filePath,className));
+        return this.hmap.get(daoClass);
     }
 
-    public RunClass[] sortData(String ...field){
-        if(field.length>1)
-        for(String x : field){
-            try {
-                new RunDAO((Double) hmap.get(className).getClass().getDeclaredField(x).get(className));
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-                e.printStackTrace();
-                return new Gson().fromJson(sortData.sort(hmap.get(className),"total"),RunClass[].class);
+    public RunClass[] sortData(String ...field)  {
+        if(field.length>1) {
+            for (int count = 0; count < hmap.get(daoClass).size(); count++) {
+                Double total=0.0;
+                for(int countField=0; countField< field.length;countField++){
+                    RunDAO obj = (RunDAO) hmap.get(daoClass).get(count);
+                    total+=obj.getValues(field[countField]);
+                }
+                ((RunDAO) hmap.get(daoClass).get(count)).setTotal(total);
             }
+            return new Gson().fromJson(sortData.sort(hmap.get(daoClass),"total"),RunClass[].class);
         }
-        return new Gson().fromJson(sortData.sort(hmap.get(className),field[0]),RunClass[].class);
+        return new Gson().fromJson(sortData.sort(hmap.get(daoClass),field[0]),RunClass[].class);
     }
 }

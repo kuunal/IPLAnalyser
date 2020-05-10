@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 
 public class LoadData {
-    public static <E> List loadData(String filePath, Class className) {
+    public static <E> ArrayList loadData(String filePath, Class className) {
         try(Reader reader = Files.newBufferedReader(Paths.get(filePath));){
             ArrayList<Object> arr = new ArrayList<>();
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();

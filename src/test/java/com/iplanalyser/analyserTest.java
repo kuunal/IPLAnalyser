@@ -30,12 +30,43 @@ public class analyserTest {
         Assert.assertEquals("MS Dhoni",object[0].player);
     }
 
+
+    @Test
+    public void testPasses_ForGettingWorstAverageBatsman(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("avg");
+        Assert.assertEquals("Alzarri Joseph",object[object.length-1].player);
+    }
+
     @Test
     public void testPasses_ForGettingTopStrikeRateBatsman(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
         RunClass[] object = iplAnalyser.sortData("sr");
         Assert.assertEquals("Ishant Sharma",object[0].player);
     }
+
+
+    @Test
+    public void testPasses_ForGettingWorstStrikeRateBatsman(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("sr");
+        Assert.assertEquals("Bhuvneshwar Kumar",object[object.length-1].player);
+    }
+
+    @Test
+    public void testPasses_ForGettingPlayerWithMaximum4sAnd6s(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("six","four");
+        Assert.assertEquals("Andre Russell",object[0].player);
+    }
+
+    @Test
+    public void testPasses_ForGettingPlayerWithMinimum4sAnd6s(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("six","four");
+        Assert.assertEquals("Andre Russell",object[object.length-1].player);
+    }
+
 
 
 

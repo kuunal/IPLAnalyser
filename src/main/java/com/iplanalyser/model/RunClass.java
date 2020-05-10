@@ -11,4 +11,11 @@ public class RunClass {
 
     @CsvBindByName(column = "SR")
     public Double sr;
+
+    @CsvBindByName(column = "6s")
+    public Integer six;
+
+    @CsvBindByName(column = "4s")
+    public Integer four;
+
 }
