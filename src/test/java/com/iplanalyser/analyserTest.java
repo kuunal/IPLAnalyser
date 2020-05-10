@@ -134,12 +134,31 @@ public class analyserTest {
         WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("sr");
         Assert.assertEquals("Mandeep Singh", wicketObjectArray[wicketObjectArray.length - 1].player);
     }
+
     @Test
     public void testPasses_ForGetting_BestBowlingStrikeRate() {
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
         WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("sr");
         Assert.assertEquals("Krishnappa Gowtham", wicketObjectArray[0].player);
     }
+
+
+    @Test
+    public void testPasses_ForGetting_BestBowlersWithBestEconomy(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
+        WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("economy");
+        Assert.assertEquals("Shivam Dube", wicketObjectArray[wicketObjectArray.length-1].player);
+
+    }
+
+    @Test
+    public void testPasses_ForGetting_BestBowlersWithWorstEconomy(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
+        WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("economy");
+        Assert.assertEquals("Ben Cutting", wicketObjectArray[0].player);
+
+    }
+
 
 }
 
