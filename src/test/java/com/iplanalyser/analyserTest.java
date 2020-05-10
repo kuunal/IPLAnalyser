@@ -54,19 +54,47 @@ public class analyserTest {
     }
 
     @Test
-    public void testPasses_ForGettingPlayerWithMaximum4sAnd6s(){
+    public void testPasses_ForGettingPlayerWith_Maximum4sAnd6s(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
         RunClass[] object = iplAnalyser.sortData("six","four");
         Assert.assertEquals("Andre Russell",object[0].player);
     }
 
     @Test
-    public void testPasses_ForGettingPlayerWithMinimum4sAnd6s(){
+    public void testPasses_ForGettingPlayerWith_Minimum4sAnd6s(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
         RunClass[] object = iplAnalyser.sortData("six","four");
-        Assert.assertEquals("Andre Russell",object[object.length-1].player);
+        Assert.assertEquals("Shakib Al Hasan",object[object.length-1].player);
     }
 
+    @Test
+    public void testPasses_ForGettingPlayer_WithBestStrikeAnd_Maximum4sAnd6s(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("six","four","sr");
+        Assert.assertEquals("Ishant Sharma",object[0].player);
+    }
+
+    @Test
+    public void testPasses_ForGettingPlayer_WithWorstStrike_AndMinimum4sAnd6s(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("six","four","sr");
+        Assert.assertEquals("Bhuvneshwar Kumar",object[object.length-1].player);
+    }
+
+
+    @Test
+    public void testPasses_ForGettingPlayer_WithGreatStrikeRate_AndAverage(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("avg","sr");
+        Assert.assertEquals("Ishant Sharma",object[0].player);
+    }
+
+    @Test
+    public void testPasses_ForGettingPlayer_WithLeastStrikeRate_AndAverage(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("avg","sr");
+        Assert.assertEquals("Bhuvneshwar Kumar",object[object.length-1].player);
+    }
 
 
 

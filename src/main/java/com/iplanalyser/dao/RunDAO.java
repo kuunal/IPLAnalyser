@@ -25,9 +25,10 @@ public class RunDAO {
     public Double getValues(String field){
         if(field.equals("six"))
             return Double.valueOf(this.six);
-//        else if(field.equals(four))
+        else if(field.equals("four"))
             return Double.valueOf(this.four);
-
+//        else if(field.equals("sr"))
+            return Double.valueOf(sr);
     }
 
 }
