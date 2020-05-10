@@ -18,4 +18,7 @@ public class RunClass {
     @CsvBindByName(column = "4s")
     public Integer four;
 
+    @CsvBindByName(column = "Runs")
+    public Integer run;
+
 }

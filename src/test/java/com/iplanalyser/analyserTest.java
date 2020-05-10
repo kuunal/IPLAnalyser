@@ -86,7 +86,7 @@ public class analyserTest {
     public void testPasses_ForGettingPlayer_WithGreatStrikeRate_AndAverage(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
         RunClass[] object = iplAnalyser.sortData("avg","sr");
-        Assert.assertEquals("Ishant Sharma",object[0].player);
+        Assert.assertEquals("David Warner",object[0].player);
     }
 
     @Test
@@ -94,6 +94,21 @@ public class analyserTest {
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
         RunClass[] object = iplAnalyser.sortData("avg","sr");
         Assert.assertEquals("Bhuvneshwar Kumar",object[object.length-1].player);
+    }
+
+
+    @Test
+    public void testPasses_ForGettingPlayer_WithBestRun_AndAverage(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("avg","run");
+        Assert.assertEquals("David Warner",object[0].player);
+    }
+
+    @Test
+    public void testPasses_ForGettingPlayer_WithLeastRun_AndAverage(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("avg","run");
+        Assert.assertEquals("Pawan Negi",object[object.length-1].player);
     }
 
 
