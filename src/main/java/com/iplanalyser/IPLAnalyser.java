@@ -3,8 +3,10 @@ package com.iplanalyser;
 
 import com.google.gson.Gson;
 import com.iplanalyser.dao.RunDAO;
+import com.iplanalyser.dao.WicketsDAO;
 import com.iplanalyser.enums.Type;
 import com.iplanalyser.model.RunClass;
+import com.iplanalyser.model.WicketsClass;
 import com.sun.jdi.DoubleValue;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,7 +25,7 @@ public class IPLAnalyser {
         return this.hmap.get(daoClass);
     }
 
-    public RunClass[] sortData(String ...field)  {
+    public RunClass[] sortRunCSV(String ...field)  {
         if(field.length>1) {
             for (int count = 0; count < hmap.get(daoClass).size(); count++) {
                 Double total=0.0;
@@ -37,4 +39,20 @@ public class IPLAnalyser {
         }
         return new Gson().fromJson(sortData.sort(hmap.get(daoClass),field[0]),RunClass[].class);
     }
+
+    public WicketsClass[] sortWicket(String... field)  {
+        if(field.length>1) {
+            for (int count = 0; count < hmap.get(daoClass).size(); count++) {
+                Double total=0.0;
+                for(int countField=0; countField< field.length;countField++){
+                    WicketsDAO obj = (WicketsDAO) hmap.get(daoClass).get(count);
+                    total+=obj.getValues(field[countField]);
+                }
+                ((WicketsDAO) hmap.get(daoClass).get(count)).setTotal(total);
+            }
+            return new Gson().fromJson(sortData.sort(hmap.get(daoClass),"total"),WicketsClass[].class);
+        }
+        return new Gson().fromJson(sortData.sort(hmap.get(daoClass),field[0]),WicketsClass[].class);
+    }
+
 }
