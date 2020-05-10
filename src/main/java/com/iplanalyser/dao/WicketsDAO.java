@@ -6,11 +6,13 @@ public class WicketsDAO {
 
     public String player;
     public Double avg;
+    public Double sr;
     public Double total=0.0;
 
     public WicketsDAO(WicketsClass object){
         this.avg=object.avg;
         this.player=object.player;
+        this.sr=object.sr;
     }
 
     public Double getValues(String field) {

@@ -10,4 +10,7 @@ public class WicketsClass {
     @CsvBindByName(column = "PLAYER")
     public String player;
 
+    @CsvBindByName(column = "SR")
+    public Double sr;
+
 }
