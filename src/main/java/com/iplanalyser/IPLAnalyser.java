@@ -27,9 +27,9 @@ public class IPLAnalyser {
                 new RunDAO((Double) hmap.get(className).getClass().getDeclaredField(x).get(className));
             } catch (IllegalAccessException | NoSuchFieldException e) {
                 e.printStackTrace();
+                return new Gson().fromJson(sortData.sort(hmap.get(className),"total"),RunClass[].class);
             }
-            return new Gson().fromJson(sortData.sort(hmap.get(className),field[0]),RunClass[].class);
         }
-        return new Gson().fromJson(sortData.sort(hmap.get(className),"total"),RunClass[].class);
+        return new Gson().fromJson(sortData.sort(hmap.get(className),field[0]),RunClass[].class);
     }
 }

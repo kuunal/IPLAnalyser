@@ -8,4 +8,7 @@ public class RunClass {
 
     @CsvBindByName(column = "PLAYER")
     public String player;
+
+    @CsvBindByName(column = "SR")
+    public Double sr;
 }

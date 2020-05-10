@@ -27,8 +27,16 @@ public class analyserTest {
     public void testPasses_ForGettingTopAverageBatsman(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
         RunClass[] object = iplAnalyser.sortData("avg");
-        Assert.assertEquals("Tim Southee",object[0].player);
+        Assert.assertEquals("MS Dhoni",object[0].player);
     }
+
+    @Test
+    public void testPasses_ForGettingTopStrikeRateBatsman(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
+        RunClass[] object = iplAnalyser.sortData("sr");
+        Assert.assertEquals("Ishant Sharma",object[0].player);
+    }
+
 
 
 }
