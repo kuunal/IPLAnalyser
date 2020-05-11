@@ -9,6 +9,7 @@ public class RunDAO {
     public Integer six;
     public Integer four;
     public Integer run;
+    public Integer matches;
     public Double total=0.0;
     public RunDAO(RunClass obj){
         this.avg=obj.avg;
@@ -17,6 +18,7 @@ public class RunDAO {
         this.four=obj.four;
         this.six=obj.six;
         this.run=obj.run;
+        this.matches=obj.matches;
     }
     public RunDAO(){}
 
@@ -26,11 +28,11 @@ public class RunDAO {
 
     public Double getValues(String field){
         if(field.equals("six"))
-            return Double.valueOf(this.six);
+            return Double.valueOf(this.six*6);
         else if(field.equals("four"))
-            return Double.valueOf(this.four);
+            return Double.valueOf(this.four*4);
         else if(field.equals("sr"))
-            return Double.valueOf(sr);
+            return Double.valueOf(this.sr);
         return Double.valueOf(run);
     }
 

@@ -21,4 +21,6 @@ public class RunClass {
     @CsvBindByName(column = "Runs")
     public Integer run;
 
+    @CsvBindByName(column = "Mat")
+    public Integer matches;
 }

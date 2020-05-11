@@ -72,7 +72,7 @@ public class analyserTest {
     public void testPasses_ForGettingPlayer_WithBestStrikeAnd_Maximum4sAnd6s(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_RUNS_CSV,"run");
         RunClass[] object = iplAnalyser.sortRunCSV("six","four","sr");
-        Assert.assertEquals("Ishant Sharma",object[0].player);
+        Assert.assertEquals("Andre Russell",object[0].player);
     }
 
     @Test
@@ -113,33 +113,33 @@ public class analyserTest {
     }
 
     @Test
-    public void testPasses_ForGetting_TopBowlingAverages(){
-        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV,"wicket");
-        WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("avg");
-        Assert.assertEquals("Krishnappa Gowtham",wicketObjectArray[0].player);
-
-    }
-
-    @Test
     public void testPasses_ForGetting_WorstBowlingAverages(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV,"wicket");
         WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("avg");
-        Assert.assertEquals("Mandeep Singh",wicketObjectArray[wicketObjectArray.length-1].player);
+        Assert.assertEquals("Ben Cutting",wicketObjectArray[0].player);
 
     }
 
     @Test
-    public void testPasses_ForGetting_WorstBowlingStrikeRate() {
-        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
-        WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("sr");
-        Assert.assertEquals("Mandeep Singh", wicketObjectArray[wicketObjectArray.length - 1].player);
+    public void testPasses_ForGetting_TopBowlingAverages(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV,"wicket");
+        WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("avg");
+        Assert.assertEquals("Anukul Roy",wicketObjectArray[wicketObjectArray.length-1].player);
+
     }
 
     @Test
     public void testPasses_ForGetting_BestBowlingStrikeRate() {
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
         WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("sr");
-        Assert.assertEquals("Krishnappa Gowtham", wicketObjectArray[0].player);
+        Assert.assertEquals("Mandeep Singh", wicketObjectArray[wicketObjectArray.length - 1].player);
+    }
+
+    @Test
+    public void testPasses_ForGetting_WorstBowlingStrikeRate() {
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
+        WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("sr");
+        Assert.assertEquals("Liam Livingstone", wicketObjectArray[0].player);
     }
 
 
@@ -147,18 +147,23 @@ public class analyserTest {
     public void testPasses_ForGetting_BestBowlersWithBestEconomy(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
         WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("economy");
-        Assert.assertEquals("Shivam Dube", wicketObjectArray[wicketObjectArray.length-1].player);
+        Assert.assertEquals("Krishnappa Gowtham", wicketObjectArray[wicketObjectArray.length-1].player);
 
     }
 
     @Test
-    public void testPasses_ForGetting_BestBowlersWithWorstEconomy(){
+    public void testPasses_ForGetting_BowlersWithWorstEconomy(){
         iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
         WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("economy");
-        Assert.assertEquals("Ben Cutting", wicketObjectArray[0].player);
-
+        Assert.assertEquals("Liam Livingstone", wicketObjectArray[0].player);
     }
 
+    @Test
+    public void testPasses_ForGetting_BestStrikeRatesWith4wAnd5w(){
+        iplAnalyser.getData(IPL_2019_FACTSHEET_MOST_WKTS_CSV, "wicket");
+        WicketsClass[] wicketObjectArray = iplAnalyser.sortWicket("sr","5w","4w");
+        Assert.assertEquals("Alzarri Joseph", wicketObjectArray[0].player);
+    }
 
 }
 

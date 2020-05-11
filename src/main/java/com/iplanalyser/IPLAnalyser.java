@@ -7,10 +7,7 @@ import com.iplanalyser.dao.WicketsDAO;
 import com.iplanalyser.enums.Type;
 import com.iplanalyser.model.RunClass;
 import com.iplanalyser.model.WicketsClass;
-import com.sun.jdi.DoubleValue;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,12 +24,15 @@ public class IPLAnalyser {
 
     public RunClass[] sortRunCSV(String ...field)  {
         if(field.length>1) {
+            boolean generateStrikeRateFlag = checkStrikeRate(field);
             for (int count = 0; count < hmap.get(daoClass).size(); count++) {
                 Double total=0.0;
+                RunDAO obj = (RunDAO) hmap.get(daoClass).get(count);
                 for(int countField=0; countField< field.length;countField++){
-                    RunDAO obj = (RunDAO) hmap.get(daoClass).get(count);
                     total+=obj.getValues(field[countField]);
                 }
+                if(generateStrikeRateFlag)
+                    total=(total-obj.getValues("sr"))/obj.getValues("matches");
                 ((RunDAO) hmap.get(daoClass).get(count)).setTotal(total);
             }
             return new Gson().fromJson(sortData.sort(hmap.get(daoClass),"total"),RunClass[].class);
@@ -40,19 +40,49 @@ public class IPLAnalyser {
         return new Gson().fromJson(sortData.sort(hmap.get(daoClass),field[0]),RunClass[].class);
     }
 
+    private boolean checkStrikeRate(String[] field) {
+        for(String x : field){
+            if(x.equals("sr")) {
+                if (x.equals("avg"))
+                   return true;
+            }
+        }return false;
+    }
+
+
     public WicketsClass[] sortWicket(String... field)  {
-        if(field.length>1) {
+            boolean generateStrikeRateFlag = checkStrikeRate(field);
             for (int count = 0; count < hmap.get(daoClass).size(); count++) {
                 Double total=0.0;
+                WicketsDAO obj = (WicketsDAO) hmap.get(daoClass).get(count);
                 for(int countField=0; countField< field.length;countField++){
-                    WicketsDAO obj = (WicketsDAO) hmap.get(daoClass).get(count);
                     total+=obj.getValues(field[countField]);
                 }
+                if(!generateStrikeRateFlag)
+                    total=(total-obj.getValues("sr"))/obj.getValues("over");
                 ((WicketsDAO) hmap.get(daoClass).get(count)).setTotal(total);
             }
             return new Gson().fromJson(sortData.sort(hmap.get(daoClass),"total"),WicketsClass[].class);
-        }
-        return new Gson().fromJson(sortData.sort(hmap.get(daoClass),field[0]),WicketsClass[].class);
     }
+
+//    private WicketsClass[] pushZeroesToEnd(WicketsDAO[] arr, String field) {
+//        int count=arr.length-1;
+//        for(int fieldElements=arr.length-1;fieldElements>=0;fieldElements--){
+//            if(arr[fieldElements].getValues(field)<0.1){
+//                arr[count--]=arr[fieldElements];
+//            }
+//        }
+//        while (count>0){
+//            try {
+//                arr[count].getClass().getField(field).set(arr[count],0.0);
+//                count--;
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            } catch (NoSuchFieldException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return new Gson().fromJson(arr.toString(),WicketsClass[].class);
+//    }
 
 }
